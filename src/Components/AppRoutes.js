@@ -4,8 +4,12 @@ import {
     Route
   } from 'react-router-dom';
   import EnquiryForm from './EnquiryForm';
-  import Home from './Home';
+  import _Home from './Home';
   import ThankYou from './ThankYou';
+import withLayout from './withLayout';
+
+  const Home = withLayout(_Home);
+
   
 const AppRoutes = () => {
     return(
