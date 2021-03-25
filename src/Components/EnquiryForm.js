@@ -1,14 +1,47 @@
 import React from 'react';
+import Label from './Label';
 import styled from 'styled-components';
+import InputText from './InputText';
+import Checkbox from './Checkbox';
 
 const EnquiryWrapper = styled.div`
-    font-size:1.5em;
     width:50%;
-    position: fixed;
+    margin-top:50px;
+    overflow: auto;
     top: 50px;
+    padding-top:20px;
     background: #9fff90;
-    height:100%;
+    min-height:100%;
     right: 0;
+    h2 {
+        margin-bottom:20px;
+    }
+    form {
+        display:flex;
+        flex-direaction: row
+    }
+    .user-details {
+        width:50%;
+        .user-address{
+            width:90%;
+            margin:5%;
+            textarea {
+                width:97%;
+            }
+        }
+        
+    }
+    .docs-options {
+        width:46%;
+        display: flex;
+        flex-wrap: wrap;
+        border-left:2px solid #000;
+        padding:0 2%;
+        div {
+            margin-bottom:10px;
+            text-align: left;
+        }
+    }
 `;
 const submitForm = () => {
     console.log("Success pe le jao")
@@ -19,37 +52,93 @@ const EnquiryForm = () => {
             <h2>Enquiry form</h2>
             <div>
                 <form>
-                    <div className='user-name'>
-                        <label>First Name</label>
-                        <input type='text' placeholder="First Name"/>
-                        <label>Last Name</label>
-                        <input type='text' placeholder="Last Name"/>
+                    <div className='user-details'>
+                        <div className='first-name'>
+                            <InputText placeholder="First Name"/>
+                        </div>
+                        <div className='last-name'>
+                            <InputText placeholder="Last Name"/>
+                        </div>
+                        <div className="user-mobile">
+                            <InputText placeholder='Mobile Number' />
+                        </div>
+                        <div className="user-address">
+                            <textarea rows='6' cols="20" placeholder='Enter your address' />
+                        </div>
                     </div>
-                    <div className="user-mobile">
-                        <label>Mobile Number:</label>
-                        +91<input type='text' placeholder='Mobile Number' />
-                    </div>
-                    <div className="user-address">
-                        <label>Address:</label>
-                        <textarea rows='4' cols="80" placeholder='Enter your address' />
-                    </div>
-                    <div class="docs-options">
+                    <div className="docs-options">
                         <div>Please select the required documents from below list:</div>
-                        <input type="checkbox" id="pan"></input><label for="pan">PAN Card</label>
-                        <input type="checkbox" id="aadhar"></input><label for="aadhar">AADHAR Card</label>
-                        <input type="checkbox" id="passport"></input><label for="passport">Passport</label>
-                        <input type="checkbox" id="gumasta"></input><label for="gumasta">Gumasta License</label>
-                        <input type="checkbox" id="udyam"></input><label for="udyam">Udyam Certificate</label>
-                        <input type="checkbox" id="income_certificate"></input><label for="income_certificate">Income Certificate</label>
-                        <input type="checkbox" id="income_tax_file"></input><label for="income_tax_file">Income Tax File</label>
-                        <input type="checkbox" id="food_license"></input><label for="food_license">Food License</label>
-                        <input type="checkbox" id="police_clearance_certificate"></input><label for="police_clearance_certificate">Police Clearance Certificate(PCC)</label>
-                        <input type="checkbox" id="pf_withdraw_services"></input><label for="pf_withdraw_services">PF Withdraw Services</label>
-                        <input type="checkbox" id="gazzettes"></input><label for="gazzettes">Gazzettes</label>
+                        
+                        <Checkbox id="pan"></Checkbox>
+                        <Label name='PAN Card' htmlFor="pan"></Label>
+                        
+                        <Checkbox id="aadhar"></Checkbox>
+                        <Label name='AADHAR Card' htmlFor="aadhar"></Label>
+                        
+                        <Checkbox id="passport"></Checkbox>
+                        <Label name='Passport' htmlFor="passport"></Label>
+                        
+                        <Checkbox id="gumasta"></Checkbox>
+                        <Label name='Gumasta License' htmlFor="gumasta"></Label>
+                        
+                        <Checkbox id="udyam"></Checkbox>
+                        <Label name='Udyam Certificate' htmlFor="udyam"></Label>
+                        
+                        <Checkbox id="income_certificate"></Checkbox>
+                        <Label name='Income Certificate' htmlFor="income_certificate"></Label>
+                        
+                        <Checkbox id="income_tax_file"></Checkbox>
+                        <Label name='Income Tax File' htmlFor="income_tax_file"></Label>
+                        
+                        <Checkbox id="food_license"></Checkbox>
+                        <Label name='Food License' htmlFor="food_license"></Label>
+                        
+                        <Checkbox id="police_clearance_certificate"></Checkbox>
+                        <Label name='Police Clearance Certificate(PCC)' htmlFor="police_clearance_certificate"></Label>
+                        
+                        <Checkbox id="pf_withdraw_services"></Checkbox>
+                        <Label name='PF Withdraw Services' htmlFor="pf_withdraw_services"></Label>
+                        
+                        <Checkbox id="gazzettes"></Checkbox>
+                        <Label name='Gazzettes' htmlFor="gazzettes"></Label>
+
+                        <Checkbox id="pan"></Checkbox>
+                        <Label name='PAN Card' htmlFor="pan"></Label>
+                        
+                        <Checkbox id="aadhar"></Checkbox>
+                        <Label name='AADHAR Card' htmlFor="aadhar"></Label>
+                        
+                        <Checkbox id="passport"></Checkbox>
+                        <Label name='Passport' htmlFor="passport"></Label>
+                        
+                        <Checkbox id="gumasta"></Checkbox>
+                        <Label name='Gumasta License' htmlFor="gumasta"></Label>
+                        
+                        <Checkbox id="udyam"></Checkbox>
+                        <Label name='Udyam Certificate' htmlFor="udyam"></Label>
+                        
+                        <Checkbox id="income_certificate"></Checkbox>
+                        <Label name='Income Certificate' htmlFor="income_certificate"></Label>
+                        
+                        <Checkbox id="income_tax_file"></Checkbox>
+                        <Label name='Income Tax File' htmlFor="income_tax_file"></Label>
+                        
+                        <Checkbox id="food_license"></Checkbox>
+                        <Label name='Food License' htmlFor="food_license"></Label>
+                        
+                        <Checkbox id="police_clearance_certificate"></Checkbox>
+                        <Label name='Police Clearance Certificate(PCC)' htmlFor="police_clearance_certificate"></Label>
+                        
+                        <Checkbox id="pf_withdraw_services"></Checkbox>
+                        <Label name='PF Withdraw Services' htmlFor="pf_withdraw_services"></Label>
+                        
+                        <Checkbox id="gazzettes"></Checkbox>
+                        <Label name='Gazzettes' htmlFor="gazzettes"></Label>
+                        
                     </div>
-                    <div className="submit-button">
+                    {/* <div className="submit-button">
                         <button onClick={submitForm()}>Submit</button>
-                    </div>
+                    </div> */}
                 </form>
             </div>
         </EnquiryWrapper>

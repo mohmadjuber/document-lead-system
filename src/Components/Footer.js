@@ -6,8 +6,6 @@ const FooterWrapper = styled.h2`
     width:100%;
     height:50px;
     line-height: 1;
-    position: fixed;
-    bottom: 0;
     background: #fff;
 `;
 
