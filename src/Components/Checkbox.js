@@ -10,9 +10,14 @@ const CheckboxWrapper = styled.div`
         margin:0;
         width:100%;
         height:100%;
+        box-shadow: 2px 2px 5px #888888;
+        border:1px solid;
+    }
+    input:hover {
+        box-shadow: -2px 2px 8px #888888;
     }
 `; 
-const Checkbox = ({id}) => {
+const Checkbox = ({id, label_name, htmlfor}) => {
     return(
         <CheckboxWrapper>
             <input type="checkbox" id = {id} />
