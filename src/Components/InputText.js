@@ -17,16 +17,16 @@ const InputTextWrapper = styled.div`
 const InputText = (props) => {
     
 //let error = false;
-    const handleChange = (event) => {
-        props.onchange(event.target.value);
-        // if(event.target.value === '' || event.target.value === undefined){
-        //         error = true;
-        //     console.log("Error", error);
-        // }
-    }
+    // const handleChange = (event) => {
+    //     props.onchange(event.target.value);
+    //     // if(event.target.value === '' || event.target.value === undefined){
+    //     //         error = true;
+    //     //     console.log("Error", error);
+    //     // }
+    // }
     return(
         <InputTextWrapper>
-            <input type="text" placeholder= {props.placeholder} onChange={handleChange} required/>
+            <input type="text" placeholder= {props.placeholder} onChange={props.handleChange} />
         </InputTextWrapper>
     );
 }

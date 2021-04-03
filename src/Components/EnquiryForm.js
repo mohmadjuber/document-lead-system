@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import Label from './Label';
+import React from 'react';
 import styled from 'styled-components';
-import InputText from './InputText';
-import Checkbox from './Checkbox';
 import { useHistory } from 'react-router';
-
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 const EnquiryWrapper = styled.div`
     width:50%;
     margin-top:50px;
@@ -23,9 +21,19 @@ const EnquiryWrapper = styled.div`
     }
     .user-details {
         width:50%;
+        input {
+            width:85%;
+            border: 1px solid;
+            padding:10px;
+            margin-bottom:20px;
+            box-shadow: 5px 5px 8px #888888;
+        }
+        input:hover {
+            box-shadow: 7px 7px 8px #888888;
+        }
         .user-address{
-            width:90%;
-            margin:5%;
+            width:95%;
+            margin:5% auto;
             textarea {
                 width:90%;
                 border: 1px solid;
@@ -45,8 +53,28 @@ const EnquiryWrapper = styled.div`
         border-left:2px solid #000;
         padding:0 2%;
         div {
-            margin-bottom:10px;
+            margin-bottom: 10px;
             text-align: left;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        label {
+            min-width:48%;
+            margin-bottom:10px;
+            span {
+                display:block;
+                margin-top:-5px;
+            }
+        }
+        input {
+            width:20px;
+            height:20px;
+            border: 1px solid;
+            box-shadow: 2px 2px 5px #888888;
+        }
+        input:hover {
+            box-shadow: -2px 2px 8px #888888;
         }
     }
     .submit-button button{
@@ -67,111 +95,105 @@ const EnquiryWrapper = styled.div`
 
 
 const EnquiryForm = () => {
-    const [nameValue, setNameValue] = useState('');
-    const [mobileValue, setMobileValue] = useState('');
     const history = useHistory();
-    const onChange = (data) => {
-        setNameValue(data);
-        setMobileValue(data);
-    }
-    const submitForm = () => {
-        
-        console.log("Success pe le jao");
-        history.push("/thankyou");
-    }
     return(
         <EnquiryWrapper>
             <h2>Enquiry form</h2>
             <div>
-                <form onSubmit={submitForm}>
-                    <div class="form-wrapper">
-                        <div className='user-details'>
-                            <div className='first-name'>
-                                <InputText data={nameValue} placeholder="First Name" onchange={(e) => {onChange(e)}} />
-                            </div>
-                            <div className="user-mobile">
-                                <InputText data={mobileValue} placeholder='Mobile Number' onchange={(e) => {onChange(e)}} />
-                            </div>
-                            <div className="user-address">
-                                <textarea rows='7' cols="16" placeholder='Enter your address' required />
+                <Formik
+                    initialValues={{ fullName: '', mobile: '', address: '', documents: [] }}
+                    validationSchema={Yup.object({
+                    fullName: Yup.string()
+                    .max(15, 'Must be 15 characters or less')
+                    .required('Required'),
+                    mobile: Yup.string()
+                    .max(10, 'Must be 10 characters')
+                    .required('Required'),
+                    address: Yup.string().required('Required'),
+                })}
+                onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                    // alert(JSON.stringify(values, null, 2));
+                    alert("values", values);
+                    setSubmitting(false);
+                    history.push('/thankyou')
+                    }, 400);
+                    
+                }}
+                >
+                    <Form>
+                        <div class="form-wrapper">
+                            <div className='user-details'>
+                                <div className='first-name'>
+                                    <Field name="fullName" type="text" placeholder="Enter Your Full Name"/>
+                                    <ErrorMessage name="fullName" />
+                                </div>
+                                <div className="user-mobile">
+                                    <Field name="mobile" type="text" maxLength="10" placeholder="Enter Your Mobile Number"/>
+                                    <ErrorMessage name="mobile" />
+                                </div>
+                                <div className="user-address">
+                                    <Field name="address" component="textarea" rows='7' cols='16' placeholder="Enter Your Address" />
+                                    <ErrorMessage name="address" />
+                                </div>
+                            </div>           
+                            <div className="docs-options">
+                                <div id="checkbox-group">Please select the required documents from below list:</div>
+                                <div role="group" aria-labelledby="checkbox-group">
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="pan_card" />
+                                        PAN Card
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="aadhar_card" />
+                                        AADHAR Card
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="passport" />
+                                        Passport
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="gumasta_license" />
+                                        Gumasta License
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="udyam_certifiate" />
+                                        Udyam Certificate
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="income_certificate" />
+                                        Income Certificate
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="income_tax_file" />
+                                        Income Tax File
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="food_license" />
+                                        Food License
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="police_clearance_certificate" />
+                                        Police Clearance Certificate(PCC)
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="pf_withdraw_services" />
+                                        PF Withdraw Services
+                                    </label>
+                                    <label>
+                                        <Field type="checkbox" name="documents" value="gazzettes" />
+                                        Gazzettes
+                                    </label>
+                                </div>
+                                <ErrorMessage name="documents" />
                             </div>
                         </div>
-                        <div className="docs-options">
-                            <div>Please select the required documents from below list:</div>
-                            
-                            <Checkbox id="pan"></Checkbox>
-                            <Label name='PAN Card' htmlFor="pan"></Label>
-                            
-                            <Checkbox id="aadhar"></Checkbox>
-                            <Label name='AADHAR Card' htmlFor="aadhar"></Label>
-                            
-                            <Checkbox id="passport"></Checkbox>
-                            <Label name='Passport' htmlFor="passport"></Label>
-                            
-                            <Checkbox id="gumasta"></Checkbox>
-                            <Label name='Gumasta License' htmlFor="gumasta"></Label>
-                            
-                            <Checkbox id="udyam"></Checkbox>
-                            <Label name='Udyam Certificate' htmlFor="udyam"></Label>
-                            
-                            <Checkbox id="income_certificate"></Checkbox>
-                            <Label name='Income Certificate' htmlFor="income_certificate"></Label>
-                            
-                            <Checkbox id="income_tax_file"></Checkbox>
-                            <Label name='Income Tax File' htmlFor="income_tax_file"></Label>
-                            
-                            <Checkbox id="food_license"></Checkbox>
-                            <Label name='Food License' htmlFor="food_license"></Label>
-                            
-                            <Checkbox id="police_clearance_certificate"></Checkbox>
-                            <Label name='Police Clearance Certificate(PCC)' htmlFor="police_clearance_certificate"></Label>
-                            
-                            <Checkbox id="pf_withdraw_services"></Checkbox>
-                            <Label name='PF Withdraw Services' htmlFor="pf_withdraw_services"></Label>
-                            
-                            <Checkbox id="gazzettes"></Checkbox>
-                            <Label name='Gazzettes' htmlFor="gazzettes"></Label>
-
-                            <Checkbox id="pan"></Checkbox>
-                            <Label name='PAN Card' htmlFor="pan"></Label>
-                            
-                            <Checkbox id="aadhar"></Checkbox>
-                            <Label name='AADHAR Card' htmlFor="aadhar"></Label>
-                            
-                            <Checkbox id="passport"></Checkbox>
-                            <Label name='Passport' htmlFor="passport"></Label>
-                            
-                            <Checkbox id="gumasta"></Checkbox>
-                            <Label name='Gumasta License' htmlFor="gumasta"></Label>
-                            
-                            <Checkbox id="udyam"></Checkbox>
-                            <Label name='Udyam Certificate' htmlFor="udyam"></Label>
-                            
-                            <Checkbox id="income_certificate"></Checkbox>
-                            <Label name='Income Certificate' htmlFor="income_certificate"></Label>
-                            
-                            <Checkbox id="income_tax_file"></Checkbox>
-                            <Label name='Income Tax File' htmlFor="income_tax_file"></Label>
-                            
-                            <Checkbox id="food_license"></Checkbox>
-                            <Label name='Food License' htmlFor="food_license"></Label>
-                            
-                            <Checkbox id="police_clearance_certificate"></Checkbox>
-                            <Label name='Police Clearance Certificate(PCC)' htmlFor="police_clearance_certificate"></Label>
-                            
-                            <Checkbox id="pf_withdraw_services"></Checkbox>
-                            <Label name='PF Withdraw Services' htmlFor="pf_withdraw_services"></Label>
-                            
-                            <Checkbox id="gazzettes"></Checkbox>
-                            <Label name='Gazzettes' htmlFor="gazzettes"></Label>
-                            
+                        <div className="submit-button">
+                            <button>Submit</button>
                         </div>
-                    </div>
-                    <div className="submit-button">
-                        <button>Submit</button>
-                    </div>
-                </form>
-            </div>
+                    </Form>
+                </Formik>
+             </div>
         </EnquiryWrapper>
     );
 }

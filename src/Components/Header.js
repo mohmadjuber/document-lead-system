@@ -1,7 +1,9 @@
 import React from 'react';
+import LogoImage from './LogoImage';
+import LinkNav from './LinkNav';
 import styled from 'styled-components';
 
-const HeaderWrapper = styled.h1`
+const HeaderWrapper = styled.div`
     font-size:1.5em;
     width:100%;
     height:50px;
@@ -9,12 +11,21 @@ const HeaderWrapper = styled.h1`
     position: fixed;
     top: 0;
     background: #fff;
+    display:flex;
+    justify-content: space-between;
+    span{
+        margin-top:10px;
+    }
 `;
 
 const Header = () => {
     return(
         <>
-        <HeaderWrapper>Header</HeaderWrapper>
+        <HeaderWrapper>
+            <LogoImage></LogoImage>
+            
+            <LinkNav></LinkNav>
+        </HeaderWrapper>
         </>
     )
 }
