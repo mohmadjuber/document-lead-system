@@ -104,17 +104,16 @@ const EnquiryForm = () => {
                     initialValues={{ fullName: '', mobile: '', address: '', documents: [] }}
                     validationSchema={Yup.object({
                     fullName: Yup.string()
-                    .max(15, 'Must be 15 characters or less')
+                    .min(5, 'We are expecting full name')
                     .required('Required'),
-                    mobile: Yup.string()
-                    .max(10, 'Must be 10 characters')
+                    mobile: Yup.number()
                     .required('Required'),
                     address: Yup.string().required('Required'),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                    // alert(JSON.stringify(values, null, 2));
-                    alert("values", values);
+                    alert(JSON.stringify(values, null, 2));
+                    //alert("values", JSON.parse(values));
                     setSubmitting(false);
                     history.push('/thankyou')
                     }, 400);
