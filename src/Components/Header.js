@@ -1,6 +1,7 @@
 import React from 'react';
 import LogoImage from './LogoImage';
 import LinkNav from './LinkNav';
+import LoginIcon from './LoginIcon';
 import styled from 'styled-components';
 
 const HeaderWrapper = styled.div`
@@ -23,8 +24,8 @@ const Header = () => {
         <>
         <HeaderWrapper>
             <LogoImage></LogoImage>
-            
             <LinkNav></LinkNav>
+            <LoginIcon></LoginIcon>
         </HeaderWrapper>
         </>
     )

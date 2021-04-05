@@ -6,10 +6,10 @@ import {
   import EnquiryForm from './EnquiryForm';
   import _Home from './Home';
   import ThankYou from './ThankYou';
-import withLayout from './withLayout';
+  import withLayout from './withLayout';
 
   const Home = withLayout(_Home);
-
+  
   
 const AppRoutes = () => {
     return(

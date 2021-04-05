@@ -77,6 +77,10 @@ const EnquiryWrapper = styled.div`
             box-shadow: -2px 2px 8px #888888;
         }
     }
+    .danger{
+        color:#ff0000;
+        padding-bottom:5px;
+    }
     .submit-button button{
         margin: 20px auto;
         padding:10px;
@@ -93,6 +97,8 @@ const EnquiryWrapper = styled.div`
     }
 `;
 
+const phoneRegExp = /^([0-9]{10})$/;
+
 
 const EnquiryForm = () => {
     const history = useHistory();
@@ -104,11 +110,11 @@ const EnquiryForm = () => {
                     initialValues={{ fullName: '', mobile: '', address: '', documents: [] }}
                     validationSchema={Yup.object({
                     fullName: Yup.string()
-                    .min(5, 'We are expecting full name')
-                    .required('Required'),
-                    mobile: Yup.number()
-                    .required('Required'),
-                    address: Yup.string().required('Required'),
+                    .min(6, <div className="danger">Please Enter the full name</div>)
+                    .required(<div className="danger">Please Enter the full name</div>),
+                    mobile: Yup.string().matches(phoneRegExp, <div className="danger">Mobile number is not valid</div>)
+                    .required(<div className="danger">Please enter the mobile number</div>),
+                    address: Yup.string().required(<div className="danger">Please enter the address</div>),
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
