@@ -14,4 +14,4 @@ Steps to setup project in local machine:
     "npm i"
 7. Now you are ready to run the project
     "npm start"
-8. open browser and got to "localhost:3000"
+8. open browser and go to "localhost:3000"
